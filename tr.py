@@ -9,7 +9,7 @@ def extract_audio_from_video(video_path, audio_path):
 
 def transcribe_audio(audio_path):
     recognizer = sr.Recognizer()
-    audio = AudioSegment.from_wav(audio_path)
+    audio = AudioSegment.from_file(audio_path)
     chunks = split_audio(audio)
     
     subtitles = []
@@ -43,9 +43,7 @@ def label_speakers(subtitles):
         labeled_subtitles.append((speaker, text))
     return labeled_subtitles
 
-def main(video_path):
-    audio_path = "extracted_audio.wav"
-    extract_audio_from_video(video_path, audio_path)
+def main(audio_path):
     subtitles = transcribe_audio(audio_path)
     labeled_subtitles = label_speakers(subtitles)
     
@@ -55,5 +53,5 @@ def main(video_path):
             print(f"{speaker}: {text}")
 
 if __name__ == "__main__":
-    video_path = "videoplayback.mp4"
-    main(video_path)
+    audio_path = "audio1.mp3"
+    main(audio_path)
